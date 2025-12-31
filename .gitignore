@@ -1,4 +1,6 @@
-/venv
+venv/
+.venv/
+env/
 5min_candles
 fibonacci_pivot
 src/__pycache__
