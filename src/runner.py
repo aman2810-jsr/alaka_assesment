@@ -12,5 +12,6 @@ def main():
         generate_candles(filename)
         generate_fibonacci_pivot(filename)
 
+    
 if __name__ == "__main__":
     main()

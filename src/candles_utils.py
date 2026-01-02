@@ -2,8 +2,6 @@ import pandas as pd
 import os
 from datetime import datetime
 
-
-
 def generate_candles(filename: str):
     file_path = f"data/{filename}"
     if not file_path.endswith(".csv"):
@@ -90,3 +88,31 @@ def generate_fibonacci_pivot(filename: str):
         output_filename = filename if filename.endswith(".csv") else f"{filename}.csv"
         pivot_df.to_csv(f"fibonacci_pivot/{output_filename}", index=False)
         print(f"Generated Fibonacci pivot levels for {filename} -> saved to fibonacci_pivot/{output_filename} ({len(pivot_df)} dates)")
+
+def get_candle(timestamp: str):
+    target_timestamp = datetime.strptime(timestamp, "%H:%M:%S").time() 
+    df = pd.read_csv("5min_candles/46900PE.csv")
+
+    df['date'] = pd.to_datetime(df['date'])
+
+    filtered_df = df[df['date'].dt.time == target_timestamp]
+    
+    return filtered_df
+
+def check_trend(timestamp1: str, timestamp2: str):
+    df1 = get_candle(timestamp1)
+    df2 = get_candle(timestamp2)
+
+    high1 = df1['high']
+    high2 = df2['high']
+
+    diff = (high2.iloc[0]) - (high1.iloc[0])
+
+    if(diff < 0):
+        print("Falling trend")
+    elif(diff > 0):
+        print("Rising trend")
+    else:
+        print("Constant")
+
+check_trend("09:45:00", "09:50:00")
