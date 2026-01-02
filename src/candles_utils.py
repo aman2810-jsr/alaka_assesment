@@ -115,4 +115,3 @@ def check_trend(timestamp1: str, timestamp2: str):
     else:
         print("Constant")
 
-check_trend("09:45:00", "09:50:00")

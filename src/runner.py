@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from candles_utils import generate_candles, generate_fibonacci_pivot
+from candles_utils import generate_candles, generate_fibonacci_pivot, check_trend
 
 DATA_DIR = "data"
 
@@ -12,6 +12,6 @@ def main():
         generate_candles(filename)
         generate_fibonacci_pivot(filename)
 
-    
+    check_trend("09:45:00", "09:50:00")
 if __name__ == "__main__":
     main()
